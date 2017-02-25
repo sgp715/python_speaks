@@ -6,7 +6,7 @@ CHUNK = 1024
 FORMAT = pyaudio.paInt16 #paInt8
 CHANNELS = 2
 RATE = 16000 #sample rate
-RECORD_SECONDS = 10
+RECORD_SECONDS = 7
 
 
 def record_and_save(file_path):
@@ -14,6 +14,7 @@ def record_and_save(file_path):
     p = pyaudio.PyAudio()
 
     frames = []
+
     stream = p.open(format=FORMAT,
                         channels=CHANNELS,
                         rate=RATE,
@@ -22,7 +23,7 @@ def record_and_save(file_path):
 
     for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
         data = stream.read(CHUNK)
-        frames.append(data) # 2 bytes(16 bits) per channel
+        frames.append(data)
 
     stream.stop_stream()
     stream.close()
