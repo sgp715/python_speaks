@@ -28,7 +28,7 @@ def bing_audio_to_text(file_path):
 
     BING_KEY = "2b422f588ba74f6a91b58108579a42a6" # Microsoft Bing Voice Recognition API keys 32-character lowercase hexadecimal strings
     try:
-        print("Microsoft Bing Voice Recognition thinks you said " + r.recognize_bing(audio, key=BING_KEY))
+        print(r.recognize_bing(audio, key=BING_KEY))
     except sr.UnknownValueError:
         print("Microsoft Bing Voice Recognition could not understand audio")
     except sr.RequestError as e:
