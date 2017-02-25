@@ -1,46 +1,31 @@
-conditionalFlag = 0
+import evaluate
 
-def lessThan(inputText): {
-    textStrings = inputText.split(" ")
-    if (textStrings[0] == "if"):
-        conditionalFlag = 1
-        var1 = textStrings[1]
+def if_(stringer):
+    stringArr = stringer.split(" ")
+    condArr = []
 
-    if (textStrings[2,6] == "less than or equal to"):
-        var2 = textStrings[7]
+    for i in range(0, len(stringArr)):
+        if stringArr[i] == "if":
+            for j in range(i + 1, len(stringArr)):
+                condArr.append(stringArr[j])
+            break
 
-    text = "if (" + var1 + "<=" + var2 + "):"
+    condFinal = " ".join(condArr)
+    finalStatment = "if " + evaluate(condFinal)
+    return finalStatement
 
-
-    return text
-}
-
-def greaterThan(inputText): {
-    textStrings = inputText.split(" ")
-    if (textStrings[0] == "if"):
-        var1 = textStrings[1]
-        conditionalFlag = 1
-    if (textStrings[2,6] == "greater than or equal to"):
-        var2 = textStrings[7]
-
-    text = "if (" + var1 + "=>" + var2 + "):"
-
-
-    return text
-
-}
-
-def equalTo(inputText): {
-    textStrings = inputText.split(" ")
-    if (textStrings[0] == "if"):
-        var1 = textStrings[1]
-        conditionalFlag = 1
-    if (textStrings[2,3] == "equal to"):
-        var2 = textStrings[4]
-
-    text = "if (" + var1 + "==" + var2 + "):"
-
-
-    return text
-
-}
+def _equals_(stringer):
+    stringArr = stringer.split(" ")
+    condArr1 = []
+    condArr2 = []
+    for i in range(0, len(stringArr)):
+        if stringArr[i] == 'equals':
+            index = i
+            for j in range(0,index):
+                condArr1.append(stringArr[j])
+            for k in range (index,len(stringArr))
+                condArr2.append(stringArr[k])
+            break
+    condFinal1 = " ".join(condArr1)
+    condFinal2 = " ".join(condArr2)
+    finalStatement = evaluate(condFinal1) + "equals" + evaluate(condFinal2)
