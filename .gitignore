@@ -1,3 +1,4 @@
 *.pyc
 *.wav
 speech_recognition/
+.DS_Store
