@@ -39,6 +39,10 @@ while True:
     print "transcribing"
     trans = transcribe.audio_to_text(SAVE_FILE)
 
+    if trans == None:
+        print "No text found"
+        continue
+
     print "saving"
     print "text understood:" + trans + '\n'
     os.remove(SAVE_FILE)

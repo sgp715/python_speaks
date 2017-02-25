@@ -1,2 +1,0 @@
-foo equals one,foo = 1
-foo plus bar,foo + bar
