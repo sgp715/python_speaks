@@ -2,15 +2,45 @@ import os
 import record
 import transcribe
 import keyboard
+# import Tkinter as tk
 
 
-r = record.Recorder()
+# def on_return(event):
+#
+    # SAVE_FILE = "output.wav"
+    #
+    # record.record_and_save(SAVE_FILE)
+    #
+    # trans = transcribe.audio_to_text(SAVE_FILE)
+    # text.insert('end', 'text understood: %s\n' % (trans, ))
+    # os.remove(SAVE_FILE)
+    #
+    # keyboard.write_text(trans)
 
-frames = r.recorde_audio()
+# def on_key(event):
+#     text.insert('end', 'You pressed %s\n' % (event.char, ))
+#
+#
+# root = tk.Tk()
+# root.geometry('300x200')
+# text = tk.Text(root, background='black', foreground='white', font=('Comic Sans MS', 12))
+# text.pack()
+# root.bind('<Return>', on_return)
+# root.bind('<KeyPress>', on_key)
+# root.mainloop()
+
 SAVE_FILE = "output.wav"
-r.save_audio(frames, SAVE_FILE)
 
-text = transcribe.audio_to_text(SAVE_FILE)
-os.remove(SAVE_FILE)
+while True:
 
-keyboard.write_text(text)
+    print "recording"
+    record.record_and_save(SAVE_FILE)
+
+    print "transcribing"
+    trans = transcribe.audio_to_text(SAVE_FILE)
+
+    print "saving"
+    print "text understood:" + trans + '\n'
+    os.remove(SAVE_FILE)
+
+    keyboard.write_text(trans)
