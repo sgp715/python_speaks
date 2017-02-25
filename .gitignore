@@ -1,1 +1,3 @@
 *.pyc
+*.wav
+speech_recognition/
