@@ -6,7 +6,7 @@ CHUNK = 1024
 FORMAT = pyaudio.paInt16 #paInt8
 CHANNELS = 2
 RATE = 16000 #sample rate
-RECORD_SECONDS = 10
+RECORD_SECONDS = 4
 WAVE_OUTPUT_FILENAME = "output.wav"
 
 class Recorder(object):
