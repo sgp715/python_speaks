@@ -1,4 +1,6 @@
 codemap = {}
+
+
 with open('dict.txt', 'r') as f:
     for each in f:
         temp = each.split(",")
