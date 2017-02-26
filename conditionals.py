@@ -30,7 +30,7 @@ def _equals_(s):
             break
     condFinal1 = " ".join(condArr1)
     condFinal2 = " ".join(condArr2)
-    finalStatement = (condFinal1) + "=" + evaluate.evaluate(condFinal2)
+    finalStatement = (condFinal1) + "==" + evaluate.evaluate(condFinal2)
 
     print finalStatement
     return finalStatement
