@@ -1,4 +1,3 @@
-
 def evaluate(s):
     """Evaluates speech to text string into python code
     Input: String"""
@@ -288,5 +287,3 @@ wordmap = {
         }
     }
 }
-
-print evaluate(test)
