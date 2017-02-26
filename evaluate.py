@@ -1,2 +1,2 @@
 def evaluate(string):
-    return 
+    return "test"
