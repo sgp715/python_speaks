@@ -5,13 +5,14 @@ def if_(s):
     if s != "":
         stringArr = txt2num.num_fix(s)
         stringArr = stringArr.split(" ")
+        original = s.split(" ")
         condArr = []
         if stringArr[0] == "if":
             for j in range(1, len(stringArr)):
-                condArr.append(stringArr[j])
+                condArr.append(original[j])
 
-        condFinal = " ".join(condArr)
-        finalStatement = "if " + evaluate.evaluate(condFinal)
+        condFinal = "".join(condArr)
+        finalStatement = "if " + evaluate.evaluate(condFinal) + " :"
 
 
     return finalStatement
@@ -20,21 +21,23 @@ def if_(s):
 
 
 def _equals_(s):
-    stringArr = txt2num.num_fix(s)
-    stringArr = stringArr.split(" ")
-    condArr1 = []
-    condArr2 = []
-    for i in range(0, len(stringArr)):
-        if stringArr[i] == 'equals':
-            index = i
-            for j in range(0,index):
-                condArr1.append(stringArr[j])
-            for k in range (index,len(stringArr)):
-                condArr2.append(stringArr[k])
-            break
-    condFinal1 = " ".join(condArr1)
-    condFinal2 = " ".join(condArr2)
-    finalStatement = (condFinal1) + "==" + evaluate.evaluate(condFinal2)
+    if stringArr != "":
+        stringArr = txt2num.num_fix(s)
+        stringArr = stringArr.split(" ")
+        original = s.split(" ")
+        condArr1 = []
+        condArr2 = []
+
+        for i in range(0, len(stringArr)):
+            if stringArr[i] == 'equals':
+                index = i
+                condArr1.append(stringArr[i-1])
+                for k in range (index+1,len(stringArr)):
+                    condArr2.append(original[k])
+                break
+        condFinal1 = "".join(condArr1)
+        condFinal2 = "".join(condArr2)
+        finalStatement = (condFinal1) + "==" + evaluate.evaluate(condFinal2)
 
 
     return finalStatement
@@ -42,6 +45,7 @@ def _equals_(s):
 def _greater_than_or_equal_to_(s):
     stringArr = txt2num.num_fix(s)
     stringArr = stringArr.split(" ")
+    original = s.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0,len(stringArr)):
@@ -52,13 +56,13 @@ def _greater_than_or_equal_to_(s):
             break
     for j in range(start,len(stringArr)):
         if stringArr[j] == 'to':
-            end = j
+            end = j+1
             for b in range(end,len(stringArr)):
-                condArr2.append(stringArr[b])
+                condArr2.append(original[b])
             break
         break
-    condFinal1 = " ".join(condArr1)
-    condFinal2 = " ".join(condArr2)
+    condFinal1 = "".join(condArr1)
+    condFinal2 = "".join(condArr2)
     finalStatement = (condFinal1) + ">=" + evaluate.evaluate(condFinal2)
 
 
@@ -68,23 +72,24 @@ def _greater_than_or_equal_to_(s):
 def _greater_than_(s):
     stringArr = txt2num.num_fix(s)
     stringArr = stringArr.split(" ")
+    original = s.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0,len(stringArr)):
         if stringArr[i] == 'greater':
             start = i
             for a in range(0,start):
-                condArr1.append(stringArr[a])
+                condArr1.append(original[a])
             break
     for j in range(start,len(stringArr)):
         if stringArr[j] == 'than':
-            end = j
+            end = j+1
             for b in range(end,len(stringArr)):
-                condArr2.append(stringArr[b])
+                condArr2.append(original[b])
             break
         break
-    condFinal1 = " ".join(condArr1)
-    condFinal2 = " ".join(condArr2)
+    condFinal1 = "".join(condArr1)
+    condFinal2 = "".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + ">" + evaluate.evaluate(condFinal2)
 
     return finalStatement
@@ -92,23 +97,24 @@ def _greater_than_(s):
 def _less_than_or_equal_to_(s):
     stringArr = txt2num.num_fix(s)
     stringArr = stringArr.split(" ")
+    original = s.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0,len(stringArr)):
         if stringArr[i] == 'less':
             start = i
             for a in range(0,start):
-                condArr1.append(stringArr[a])
+                condArr1.append(original[a])
             break
     for j in range(start,len(stringArr)):
         if stringArr[j] == 'to':
-            end = j
+            end = j+1
             for b in range(end,len(stringArr)):
-                condArr2.append(stringArr[b])
+                condArr2.append(original[b])
             break
         break
-    condFinal1 = " ".join(condArr1)
-    condFinal2 = " ".join(condArr2)
+    condFinal1 = "".join(condArr1)
+    condFinal2 = "".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "<=" + evaluate.evaluate(condFinal2)
 
 
@@ -117,23 +123,24 @@ def _less_than_or_equal_to_(s):
 def _less_than_(s):
     stringArr = txt2num.num_fix(s)
     stringArr = stringArr.split(" ")
+    original = s.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0,len(stringArr)):
         if stringArr[i] == 'less':
             start = i
             for a in range(0,start):
-                condArr1.append(stringArr[a])
+                condArr1.append(original[a])
             break
     for j in range(start,len(stringArr)):
         if stringArr[j] == 'than':
-            end = j
+            end = j+1
             for b in range(end,len(stringArr)):
-                condArr2.append(stringArr[b])
+                condArr2.append(original[b])
             break
         break
-    condFinal1 = " ".join(condArr1)
-    condFinal2 = " ".join(condArr2)
+    condFinal1 = "".join(condArr1)
+    condFinal2 = "".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "<" + evaluate.evaluate(condFinal2)
 
 
@@ -142,18 +149,19 @@ def _less_than_(s):
 def _and_(s):
     stringArr = txt2num.num_fix(s)
     stringArr = stringArr.split(" ")
+    original = s.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0, len(stringArr)):
         if stringArr[i] == 'and':
             index = i
             for j in range(0,index):
-                condArr1.append(stringArr[j])
-            for k in range (index,len(stringArr)):
-                condArr2.append(stringArr[k])
+                condArr1.append(original[j])
+            for k in range (index+1,len(stringArr)):
+                condArr2.append(original[k])
             break
-    condFinal1 = " ".join(condArr1)
-    condFinal2 = " ".join(condArr2)
+    condFinal1 = "".join(condArr1)
+    condFinal2 = "".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "and" + evaluate.evaluate(condFinal2)
 
 
@@ -162,18 +170,19 @@ def _and_(s):
 def _or_(s):
     stringArr = txt2num.num_fix(s)
     stringArr = stringArr.split(" ")
+    original = s.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0, len(stringArr)):
         if stringArr[i] == 'or':
             index = i
             for j in range(0,index):
-                condArr1.append(stringArr[j])
-            for k in range (index,len(stringArr)):
-                condArr2.append(stringArr[k])
+                condArr1.append(original[j])
+            for k in range (index+1,len(stringArr)):
+                condArr2.append(original[k])
             break
-    condFinal1 = " ".join(condArr1)
-    condFinal2 = " ".join(condArr2)
+    condFinal1 = "".join(condArr1)
+    condFinal2 = "".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "or" + evaluate.evaluate(condFinal2)
 
 
@@ -182,23 +191,24 @@ def _or_(s):
 def _does_not_equal_(s):
     stringArr = txt2num.num_fix(s)
     stringArr = stringArr.split(" ")
+    original = s.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0,len(stringArr)):
         if stringArr[i] == 'does':
             start = i
             for a in range(0,start):
-                condArr1.append(stringArr[a])
+                condArr1.append(original[a])
             break
     for j in range(start,len(stringArr)):
         if stringArr[j] == 'equal':
-            end = j
+            end = j+1
             for b in range(end,len(stringArr)):
-                condArr2.append(stringArr[b])
+                condArr2.append(original[b])
             break
         break
-    condFinal1 = " ".join(condArr1)
-    condFinal2 = " ".join(condArr2)
+    condFinal1 = "".join(condArr1)
+    condFinal2 = "".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "!=" + evaluate.evaluate(condFinal2)
 
 
