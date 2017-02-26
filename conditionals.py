@@ -1,7 +1,9 @@
 import evaluate
+import txt2num
 
 def if_(s):
-    stringArr = s.split(" ")
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
     condArr = []
     if stringArr[0] == "if":
         for j in range(1, len(stringArr)):
@@ -10,14 +12,15 @@ def if_(s):
     condFinal = " ".join(condArr)
     finalStatement = "if " + evaluate.evaluate(condFinal)
 
-    print finalStatement
+
     return finalStatement
 
 
 
 
 def _equals_(s):
-    stringArr = s.split(" ")
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0, len(stringArr)):
@@ -32,11 +35,12 @@ def _equals_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = (condFinal1) + "==" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 def _greater_than_or_equal_to_(s):
-    stringArr = s.split(" ")
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0,len(stringArr)):
@@ -56,12 +60,13 @@ def _greater_than_or_equal_to_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = (condFinal1) + ">=" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 
 def _greater_than_(s):
-    stringArr = s.split(" ")
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0,len(stringArr)):
@@ -81,11 +86,11 @@ def _greater_than_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + ">" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
     return finalStatement
 
 def _less_than_or_equal_to_(s):
-    stringArr = s.split(" ")
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0,len(stringArr)):
@@ -105,11 +110,12 @@ def _less_than_or_equal_to_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "<=" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 def _less_than_(s):
-    stringArr = s.split(" ")
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0,len(stringArr)):
@@ -129,11 +135,12 @@ def _less_than_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "<" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 def _and_(s):
-    stringArr = s.split(" ")
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0, len(stringArr)):
@@ -148,11 +155,12 @@ def _and_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "and" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 def _or_(s):
-    stringArr = s.split(" ")
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0, len(stringArr)):
@@ -167,11 +175,12 @@ def _or_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "or" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 def _does_not_equal_(s):
-    stringArr = s.split(" ")
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
     condArr1 = []
     condArr2 = []
     for i in range(0,len(stringArr)):
@@ -191,11 +200,11 @@ def _does_not_equal_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "!=" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 
 
-if_("if x equals 2")
-_equals_("x equals 2")
-_greater_than_or_equal_to_("x greater than or equal to")
+# if_("if x equals 2")
+# _equals_("x equals 2")
+# _greater_than_or_equal_to_("x greater than or equal to")
