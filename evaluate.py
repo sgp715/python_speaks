@@ -1,11 +1,12 @@
-
 def evaluate(s):
     """Evaluates speech to text string into python code
     Input: String"""
+    words = s.split(" ")
+    for i, word in enumerate(words):
+        return 0
 
-    for each in test.split(" "):
-        if wordmap.get(each,'_') != '_':
-            return wordmap[each]
+
+
 
 
 def check_bucket(s):
@@ -110,7 +111,10 @@ def _mod_(s):
 def _to_the_power_of_(s):
     return 0
 
-def dot_access(s):
+def _dot_access(s):
+    return 0
+
+def _index_(s):
     return 0
 
 test = "if one plus one equals two"
@@ -276,9 +280,10 @@ wordmap = {
             }
         },
         'dot' : {
-            '_' : dot_access
+            '_' : _dot_access
+        },
+        'index' : {
+            '_' : _index_
         }
     }
 }
-
-print evaluate(test)
