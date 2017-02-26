@@ -1,12 +1,38 @@
+
+def paths(tree, cur=()):
+    if not tree:
+        yield cur
+    else:
+        if isinstance(tree, dict):
+            for n, s in tree.items():
+                for path in paths(s, cur+(n,)):
+                    yield path
+        else:
+            yield cur, tree
+
+
+
+def walk(s, node, keylist=[]):
+    for key, item in node.items():
+        if isinstance(item, dict):
+            keylist.append(key)
+            walk(s,item, keylist)
+            keylist = []
+        else:
+            keylist.append(key)
+
+            return item(s)
+
+
+
+
 def evaluate(s):
     """Evaluates speech to text string into python code
     Input: String"""
     words = s.split(" ")
-    for i, word in enumerate(words):
-        return 0
-
-
-
+    code = ""
+    code_index = 0
+    current = []
 
 
 def check_bucket(s):
@@ -61,6 +87,7 @@ def multiply_(s):
     return 0
 
 def if_(s):
+    print "here"
     return 0
 
 def call_function(s):
@@ -116,9 +143,6 @@ def _dot_access(s):
 
 def _index_(s):
     return 0
-
-test = "if one plus one equals two"
-
 wordmap = {
     'define' : {
         'function' : {
@@ -251,7 +275,7 @@ wordmap = {
                         }
                     }
                 },
-                '-' : _less_than_
+                '_' : _less_than_
             }
         },
         'and' : {
@@ -287,3 +311,28 @@ wordmap = {
         }
     }
 }
+
+test = "if one plus one equals two"
+test = test.split(" ")
+for each in list(paths(wordmap)):
+    check = True
+    index = 0
+    for i,key in enumerate(each[0]):
+        print key, test[i]
+        if key == test[i]:
+            index = index + 1
+            continue
+        elif key == '_' and i < len(each[0]) -1:
+            while index <= len(test)-1 and test[index] != each[0][i+1]:
+                index = index + 1
+            if index == len(test):
+                check = False
+            break
+        elif key == '_' and i == len(each[0])-1:
+            break
+        else:
+            check = False
+            break
+    if check:
+        print each[1](test)
+        break
