@@ -19,6 +19,6 @@ A package that allows you to program python
     $ sudo pip install -r requirements.txt
     ```
 
-## [Contributor Guide]()
+## [Contributor Guide](https://github.com/sgp715/python_speaks/blob/master/CONTRIBUTING.md)
 
-## [License]()
+## [License](https://github.com/sgp715/python_speaks/blob/master/LICENSE.md)
