@@ -2,15 +2,16 @@ import evaluate
 import txt2num
 
 def if_(s):
-    stringArr = txt2num.num_fix(s)
-    stringArr = stringArr.split(" ")
-    condArr = []
-    if stringArr[0] == "if":
-        for j in range(1, len(stringArr)):
-            condArr.append(stringArr[j])
+    if s != "":
+        stringArr = txt2num.num_fix(s)
+        stringArr = stringArr.split(" ")
+        condArr = []
+        if stringArr[0] == "if":
+            for j in range(1, len(stringArr)):
+                condArr.append(stringArr[j])
 
-    condFinal = " ".join(condArr)
-    finalStatement = "if " + evaluate.evaluate(condFinal)
+        condFinal = " ".join(condArr)
+        finalStatement = "if " + evaluate.evaluate(condFinal)
 
 
     return finalStatement
