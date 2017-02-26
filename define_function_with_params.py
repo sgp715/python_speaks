@@ -22,9 +22,5 @@ def define_function_with_params(stringer):
 
     statement = "def " + functionName + "(" + varName + "):"
 
-    print statement
-    return statement
 
-define_function_with_params("define function foo of x") #-> def foo(x)
-define_function_with_params("define function this function of x and y") #-> def this_function(x,y)
-define_function_with_params("define function foo of x y and z") #-> def foo(x,y,z)
+    return statement

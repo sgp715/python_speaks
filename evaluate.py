@@ -1,4 +1,5 @@
 from define_function_with_params import define_function_with_params
+import txt2num
 def paths(tree, cur=()):
     if not tree:
         yield cur
@@ -23,18 +24,11 @@ def walk(s, node, keylist=[]):
 
             return item(s)
 
-
-
-
-
-
-
 def check_bucket(s):
     """Determines what bucket the string falls into
     Input: String
     Ouput: String"""
     words = string.split(" ")
-
 
 
 def define_class(s):
@@ -80,7 +74,32 @@ def multiply_(s):
     return 0
 
 def if_(s):
-    return 0
+    if s != "":
+
+        stringArr = txt2num.num_fix(s)
+        stringArr = stringArr.split(" ")
+
+        original = s.split(" ")
+        condArr = []
+        if stringArr[0] == "if":
+            for j in original[1:]:
+                condArr.append(j)
+
+        condFinal = ""
+        for each in condArr:
+            if condFinal == "":
+                condFinal = each
+            else:
+                condFinal = condFinal + " "+each
+
+        finalStatement = "if " + evaluate(condFinal) + ":"
+
+    return finalStatement
+
+
+
+
+
 
 def call_function(s):
     return 0
@@ -101,13 +120,56 @@ def _divided_by_(s):
     return 0
 
 def _equals_(s):
-     return 0
+    if s != "":
+
+        stringArr = txt2num.num_fix(s)
+        stringArr = stringArr.split(" ")
+        original = s.split(" ")
+        condArr1 = []
+        condArr2 = []
+
+        for i in range(0, len(stringArr)):
+            if stringArr[i] == 'equals':
+                index = i
+                condArr1.append(stringArr[i-1])
+                for k in range (index+1,len(stringArr)-1):
+                    condArr2.append(original[k])
+                break
+        condFinal1 = "".join(condArr1)
+        condFinal2 = "".join(condArr2)
+        finalStatement = (condFinal1) + "==" + evaluate(condFinal2)
+    return finalStatement
 
 def _greater_than_(s):
     return 0
 
 def _greater_than_or_equal_to_(s):
-    return 0
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
+    while "" in stringArr:
+        stringArr.remove("")
+    original = s.split(" ")
+    condArr1 = []
+    condArr2 = []
+    for i in range(0,len(stringArr)):
+        if stringArr[i] == 'greater':
+            start = i
+            for a in range(0,start):
+                condArr1.append(stringArr[a])
+            break
+    end = stringArr[start:].index('to')
+    for each in stringArr[start:][end+1:]:
+        condArr2.append(each)
+
+
+
+    condFinal1 = "".join(condArr1)
+    condFinal2 = "".join(condArr2)
+
+    finalStatement = (condFinal1) + ">=" + evaluate(condFinal2)
+
+
+    return finalStatement
 
 def _less_than_(s):
     return 0
@@ -304,14 +366,13 @@ wordmap = {
     }
 }
 
-testn = "define function brussels of y v"
+
 def evaluate(testn):
     test = testn.split(" ")
     for each in list(paths(wordmap)):
         check = True
         index = 0
         for i,key in enumerate(each[0]):
-            print key, test[i]
             if key == test[i]:
                 index = index + 1
                 continue
@@ -326,8 +387,11 @@ def evaluate(testn):
             else:
                 check = False
                 break
-        if check:
-            print each[1](testn)
-            break
+        if check :
+            return each[1](testn)
+    return txt2num.num_fix(testn)
 
-evaluate(testn)
+print evaluate("if x equals two")
+print evaluate("define function foo of x y z")
+print evaluate("if x greater than or equal to y")
+print evaluate("if x greater than or equal to 2")

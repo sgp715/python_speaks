@@ -53,9 +53,15 @@ def num_fix(str):
 
         if words[w] not in D:
             if lit_string != "":
-                output += txt2num(lit_string) + " " + words[w] + " "
+                if len(words) == w+1:
+                    output += txt2num(lit_string) + " " + words[w]
+                else:
+                    output += txt2num(lit_string) + " " + words[w] + " "
             else:
-                output += words[w] + " "
+                if len(words) == w+1:
+                    output += words[w]
+                else:
+                    output += words[w] + " "
             lit_string = ""
 
     return output
