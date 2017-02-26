@@ -8,25 +8,24 @@
 
 
 ## Testing
+* coming soon...
+
 ## Development environment details
+* developed on Linux and Mac
 
 ## How to submit changes: Pull Request protocol etc.
-_What people might expect in a response from the core devs_
 
 ## How to report a bug:
 * Templates:
-  * _What to include in a bug report_
 * First bugs for Contributors
-  * _What would be good bugs to start with?_
 
 ## New Feature Requirements
-_Any guidelines for proposing the feature_
 
 ## Style Guide / Coding conventions
 
 ## Code of Conduct
 
 ## Recognition model
-_How will contributors be recognized?_
 
 ## Where can I ask for help?
+michaelgallagher2017@u.northwestern.edu
