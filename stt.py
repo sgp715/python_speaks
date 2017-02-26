@@ -20,7 +20,7 @@ CHUNK = 1024  # CHUNKS of bytes to read each time from mic
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 10000
-THRESHOLD = 15000  # The threshold intensity that defines silence
+THRESHOLD = 10750  # The threshold intensity that defines silence
                   # and noise signal (an int. lower than THRESHOLD is silence).
 
 SILENCE_LIMIT = 1  # Silence limit in seconds. The max ammount of seconds where
@@ -91,26 +91,18 @@ def listen_for_speech(threshold=THRESHOLD, num_phrases=-1):
     while (num_phrases == -1 or n > 0):
         cur_data = stream.read(CHUNK)
         slid_win.append(math.sqrt(abs(audioop.avg(cur_data, 4))))
+        # print slid_win
         if(sum([x > THRESHOLD for x in slid_win]) > 0):
             print 't: ' + str(THRESHOLD)
             print 'x: ' + str(x)
+            print started
             if(not started):
                 print "Starting record of phrase"
                 started = True
             audio2send.append(cur_data)
         elif (started is True):
             print "Finished"
-            # The limit was reached, finish capture and deliver.
             filename = save_speech(list(prev_audio) + audio2send, p)
-            # Send file to Google and get response
-            # r = stt_google_wav(filename)
-            # if num_phrases == -1:
-            #     print "Response", r
-            # else:
-            #     response.append(r)
-            # Remove temp file. Comment line to review.
-            # os.remove(filename)
-            # Reset all
             started = False
             slid_win = deque(maxlen=SILENCE_LIMIT * rel)
             prev_audio = deque(maxlen=0.5 * rel)
@@ -131,7 +123,7 @@ def save_speech(data, p):
     """ Saves mic data to temporary WAV file. Returns filename of saved
         file """
 
-    filename = 'output_'+str(int(time.time()))
+    filename = 'output'
     # writes data to WAV file
     data = ''.join(data)
     wf = wave.open(filename + '.wav', 'wb')
@@ -143,48 +135,7 @@ def save_speech(data, p):
     return filename + '.wav'
 
 
-def stt_google_wav(audio_fname):
-    """ Sends audio file (audio_fname) to Google's text to speech
-        service and returns service's response. We need a FLAC
-        converter if audio is not FLAC (check FLAC_CONV). """
-
-    print "Sending ", audio_fname
-    #Convert to flac first
-    filename = audio_fname
-    del_flac = False
-    if 'flac' not in filename:
-        del_flac = True
-        print "Converting to flac"
-        print FLAC_CONV + filename
-        os.system(FLAC_CONV + ' ' + filename)
-        filename = filename.split('.')[0] + '.flac'
-
-    f = open(filename, 'rb')
-    flac_cont = f.read()
-    f.close()
-
-    # Headers. A common Chromium (Linux) User-Agent
-    hrs = {"User-Agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7",
-           'Content-type': 'audio/x-flac; rate=16000'}
-
-    req = urllib2.Request(GOOGLE_SPEECH_URL, data=flac_cont, headers=hrs)
-    print "Sending request to Google TTS"
-    #print "response", response
-    try:
-        p = urllib2.urlopen(req)
-        response = p.read()
-        res = eval(response)['hypotheses']
-    except:
-        print "Couldn't parse service response"
-        res = None
-
-    if del_flac:
-        os.remove(filename)  # Remove temp file
-
-    return res
-
-
 if(__name__ == '__main__'):
     listen_for_speech()  # listen to mic.
     # print stt_google_wav('hello.flac')  # translate audio file
-    # audio_int()  # To measure your mic levels
+    audio_int()  # To measure your mic levels

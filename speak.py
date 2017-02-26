@@ -2,38 +2,26 @@ import os
 import record
 import transcribe
 import keyboard
-# import Tkinter as tk
+import stt
+import time
 
-
-# def on_return(event):
-#
-    # SAVE_FILE = "output.wav"
-    #
-    # record.record_and_save(SAVE_FILE)
-    #
-    # trans = transcribe.audio_to_text(SAVE_FILE)
-    # text.insert('end', 'text understood: %s\n' % (trans, ))
-    # os.remove(SAVE_FILE)
-    #
-    # keyboard.write_text(trans)
-
-# def on_key(event):
-#     text.insert('end', 'You pressed %s\n' % (event.char, ))
-#
-#
-# root = tk.Tk()
-# root.geometry('300x200')
-# text = tk.Text(root, background='black', foreground='white', font=('Comic Sans MS', 12))
-# text.pack()
-# root.bind('<Return>', on_return)
-# root.bind('<KeyPress>', on_key)
-# root.mainloop()
 
 SAVE_FILE = "output.wav"
+
+
+simple_rules = {
+                "declare":["variable","list","class","function"],
+                "control":["if", "for", "while"]
+                }
+
+declared = []
+
+time.sleep(2)
 
 while True:
 
     print "recording"
+    # stt.listen_for_speech(SAVE_FILE)
     record.record_and_save(SAVE_FILE)
 
     print "transcribing"
@@ -47,4 +35,25 @@ while True:
     print "text understood:" + trans + '\n'
     os.remove(SAVE_FILE)
 
-    keyboard.write_text(trans)
+
+
+    words = trans.split(' ')
+    text = ''
+    if words[0] == "declare":
+        if words[1] in simple_rules["declare"]:
+            if words[1] == "variable":
+                text += (words[2].lower() + ' = ' + '"' + words[4]) + '"'
+    # elif words[0] == "control":
+    #
+    elif words[0] == "print":
+        text = "print "
+        for r in words[1:]:
+            text += r
+    elif words[0] == "hello":
+        keyboard.new_line()
+
+    else:
+        print "Didn't get that please try again"
+        continue
+
+    keyboard.write_text(text)

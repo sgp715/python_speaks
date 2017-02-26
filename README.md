@@ -1,9 +1,14 @@
-# Python Speaks
-
-## Description
+# Speakeasy
 A package that allows you to program python
+  * hands-free programming
 
-## Installation
+## USAGE
+  * simply follow the installation instructions and then you should be able to start the program from terminal
+  ```
+  $ python speak.py
+  ```
+
+## INSTALLATION INSTRUCTIONS
 * On Ubuntu
     * Install the program needed to fake keyboard input
     ```
@@ -13,13 +18,7 @@ A package that allows you to program python
     ```
     $ sudo pip install -r requirements.txt
     ```
-    * Install Sphinx
 
-    1.
-    ```
-    $ sudo apt-get install python python-all-dev python-pip build-essential swig git libpulse-dev
-    ```
-    2.
-    ```
-    $ pip install pocketsphinx
-    ```
+## [Contributor Guide](https://github.com/sgp715/python_speaks/blob/master/CONTRIBUTING.md)
+
+## [License](https://github.com/sgp715/python_speaks/blob/master/LICENSE.md)
