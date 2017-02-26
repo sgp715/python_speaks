@@ -59,4 +59,3 @@ def num_fix(str):
             lit_string = ""
 
     return output
-print txt2num("four plus zero")

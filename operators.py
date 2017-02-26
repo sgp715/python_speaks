@@ -8,7 +8,7 @@ def keywords():
 
 def sum_evaluate(string):
     words = txt2num.num_fix(string)
-    words = string.split(words)
+    words = words.split()
 
     prefix_flag = 0
     operator_keywords = keywords()
@@ -66,7 +66,7 @@ sum_evaluate('add five four and four')
 
 def subtract_evaluate(string):
     words = txt2num.num_fix(string)
-    words = string.split(words)
+    words = words.split()
 
     prefix_flag = 0
     operator_keywords = keywords()
@@ -108,7 +108,7 @@ subtract_evaluate('subtract ten from ten')
 
 def multiply_evaluate(string):
     words = txt2num.num_fix(string)
-    words = string.split(words)
+    words = words.split()
     prefix_flag = 0
     operator_keywords = keywords()
     operator_keywords.remove('times')
@@ -164,7 +164,7 @@ multiply_evaluate('multiply eleven by eleven')
 
 def mod_evaluate(string): #do txt2num
     words = txt2num.num_fix(string)
-    words = string.split(words)
+    words = words.split()
     output = words[0] + "%" + words[2]
     print output
     return output
@@ -174,7 +174,7 @@ mod_evaluate("four thousand mod seventy six")
 
 def exp_evaluate(string): #do txt2num
     words = txt2num.num_fix(string)
-    words = string.split(words)
+    words = words.split()
     output = words[0] + "**" + words[2]
     print output
     return output
