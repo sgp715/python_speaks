@@ -8,9 +8,8 @@ def if_(s):
             condArr.append(stringArr[j])
 
     condFinal = " ".join(condArr)
-    finalStatement = "if " + evaluate.evaluate(condFinal)
+    finalStatement = "if " + evaluate.evaluate(condFinal) + ":"
 
-    print finalStatement
     return finalStatement
 
 
@@ -32,7 +31,6 @@ def _equals_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = (condFinal1) + "==" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
     return finalStatement
 
 def _greater_than_or_equal_to_(s):
@@ -56,7 +54,7 @@ def _greater_than_or_equal_to_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = (condFinal1) + ">=" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 
@@ -81,7 +79,7 @@ def _greater_than_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + ">" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 def _less_than_or_equal_to_(s):
@@ -105,7 +103,7 @@ def _less_than_or_equal_to_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "<=" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 def _less_than_(s):
@@ -129,7 +127,7 @@ def _less_than_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "<" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 def _and_(s):
@@ -148,7 +146,7 @@ def _and_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "and" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 def _or_(s):
@@ -167,7 +165,7 @@ def _or_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "or" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 def _does_not_equal_(s):
@@ -191,11 +189,11 @@ def _does_not_equal_(s):
     condFinal2 = " ".join(condArr2)
     finalStatement = evaluate.evaluate(condFinal1) + "!=" + evaluate.evaluate(condFinal2)
 
-    print finalStatement
+
     return finalStatement
 
 
 
-if_("if x equals 2")
+if_("if")
 _equals_("x equals 2")
 _greater_than_or_equal_to_("x greater than or equal to")
