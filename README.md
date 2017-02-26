@@ -19,7 +19,6 @@ A package that allows you to program python
     $ sudo pip install -r requirements.txt
     ```
 
-## Contributor Guide
-[Contributors](http://www.google.com)
+## [Contributor Guide]()
 
-## License
+## [License]()
