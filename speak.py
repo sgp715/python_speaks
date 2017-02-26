@@ -4,6 +4,7 @@ import transcribe
 import keyboard
 import stt
 import time
+import evaluate
 
 
 SAVE_FILE = "output.wav"
@@ -35,7 +36,9 @@ while True:
     print "text understood:" + trans + '\n'
     os.remove(SAVE_FILE)
 
+    text = evaluate.evaluate(trans)
 
+    """
 
     words = trans.split(' ')
     text = ''
@@ -54,6 +57,7 @@ while True:
 
     else:
         print "Didn't get that please try again"
-        continue
+        continue """
+
 
     keyboard.write_text(text)
