@@ -1,5 +1,9 @@
 from define_function_with_params import define_function_with_params
 import txt2num
+
+def keywords():
+    return ['plus','sum','add','minus','subtract','product','multiply','times','divide','divided','quotient','to','power','mod','modulus'];
+
 def paths(tree, cur=()):
     if not tree:
         yield cur
@@ -30,18 +34,91 @@ def check_bucket(s):
     Ouput: String"""
     words = string.split(" ")
 
+def subtract_evaluate(string):
+    words = txt2num.num_fix(string)
+    words = words.split()
+
+    prefix_flag = 0
+    operator_keywords = keywords()
+    operator_keywords.remove('subtract')
+    operator_keywords.remove('minus') #specify for subtract evaluate
+
+    if words[0] == "subtract": #add take away?
+        prefix_flag = 1
+        words = words[1:]
+
+    output = words[0] #initialize the first difference
+    words = words[1:]
+    num_words = len(words)
+
+    if prefix_flag: #we need to add in the minus symbols
+        if words[1] == "from":
+            output += "-"+words[2]
+        else:
+            output += '-'+words[1]
+
+    else: #we don't need to add the minus symbols
+        for w in range(num_words):
+            if words[w] == "minus":
+                output += "-"
+            elif words[w] in operator_keywords:
+                output += evaluate(words[w:]) #pass the rest of words to evaluate
+                print output
+                return output
+            else:
+                output += words[w]
+    return output
 
 def define_class(s):
     return 0
 
-def for_loop(s):
-    return 0
+def for_loop(string):
+    words = string.split()
+    if words[0] != "for":
+        print "Error with for"
+
+    #search for "in"
+    string1 = words[1] #assume there is a variable there
+    string2 = ""
+    s1 = 1
+    s2 = 0 #booleans for filling which string
+    for w in words[2:]:
+        if w=="in":
+            s1=0
+            s2=1
+            continue
+        elif s1:
+            string1 += " " + w
+        elif s2:
+            string2 += w + " "
+
+    output = "for " + evaluate(string1) + " in " + evaluate(string2) +":"
+    return output
 
 def while_loop(s):
     return 0
 
 def let_equal(s):
-    return 0
+    words = s.split()
+    if words[0] != "let":
+        print "Error with let"
+
+    #search for "in"
+    string1 = words[1] #assume there is a variable there
+    string2 = ""
+    s1 = 1
+    s2 = 0 #booleans for filling which string
+    for w in words[2:]:
+        if w=="equal":
+            s1=0
+            s2=1
+            continue
+        elif s1:
+            string1 += " " + w
+        elif s2:
+            string2 += w + " "
+    output =  evaluate(string1) + " = " + evaluate(string2)
+    return output
 
 def make_new_list(s):
     return 0
@@ -91,7 +168,7 @@ def if_(s):
                 condFinal = each
             else:
                 condFinal = condFinal + " "+each
-
+        print condFinal
         finalStatement = "if " + evaluate(condFinal) + ":"
 
     return finalStatement
@@ -178,7 +255,20 @@ def _less_than_or_equal_to_(s):
     return 0
 
 def _and_(s):
-    return 0
+    stringArr = txt2num.num_fix(s)
+    stringArr = stringArr.split(" ")
+    original = s.split(" ")
+    condArr1 = []
+    condArr2 = []
+    index = original.index('and')
+    for each in original[:index]:
+        condArr1.append(each)
+    for each in original[index+1:]:
+        condArr2.append(each)
+    condFinal1 = " ".join(condArr1)
+    condFinal2 = " ".join(condArr2)
+    finalStatement = evaluate(condFinal1) + "and " + evaluate(condFinal2)
+    return finalStatement
 
 def _or_(s):
     return 0
@@ -256,7 +346,7 @@ wordmap = {
     'subtract' : {
         '_' : {
             'from' : {
-                '_' : subtract_from
+                '_' : subtract_evaluate
             }
         }
     },
@@ -298,7 +388,7 @@ wordmap = {
             '_' : _times_
         },
         'minus' : {
-            '_' : _minus_
+            '_' : subtract_evaluate
         },
         'divided' : {
             'by' : {
@@ -366,7 +456,8 @@ wordmap = {
     }
 }
 
-
+for each in list(paths(wordmap)):
+    print each[0]
 def evaluate(testn):
     test = testn.split(" ")
     for each in list(paths(wordmap)):
@@ -391,7 +482,11 @@ def evaluate(testn):
             return each[1](testn)
     return txt2num.num_fix(testn)
 
-print evaluate("if x equals two")
+print evaluate("if a minus b is greater than or equal to c minus d")
+print evaluate("let x equal y minus 4")
+print evaluate("let x equal y greater than or equal to z")
+print evaluate("for each in x")
+print evaluate("if x equals two and y equals three")
 print evaluate("define function foo of x y z")
 print evaluate("if x greater than or equal to y")
 print evaluate("if x greater than or equal to 2")
