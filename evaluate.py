@@ -456,8 +456,7 @@ wordmap = {
     }
 }
 
-for each in list(paths(wordmap)):
-    print each[0]
+
 def evaluate(testn):
     test = testn.split(" ")
     for each in list(paths(wordmap)):
@@ -482,7 +481,6 @@ def evaluate(testn):
             return each[1](testn)
     return txt2num.num_fix(testn)
 
-print evaluate("if a minus b is greater than or equal to c minus d")
 print evaluate("let x equal y minus 4")
 print evaluate("let x equal y greater than or equal to z")
 print evaluate("for each in x")
